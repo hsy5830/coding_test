@@ -1,11 +1,14 @@
 N = int(input())
 arr = [int(input()) for _ in range(N)]
 
-# 버블정렬
-for i in range(N-1, 0, -1):
-    for j in range(i):
-        if arr[j] > arr[j+1]:
-            arr[j], arr[j+1] = arr[j+1], arr[j]
+# 선택 정렬
+for i in range(N):
+    idx = i; m = arr[i]
+    for j in range(i,N):
+        if arr[j] < m:
+            idx = j; m = arr[j]
+    if idx > i:
+        arr[idx], arr[i] = arr[i], arr[idx]
 
 for n in arr:
     print(n)
