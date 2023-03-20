@@ -18,5 +18,6 @@ for i in range(N):
         if len(heap) == 0:
             print(0)
             continue
+
         r = heapq.heappop(heap)
         print(r[0] * r[1])
