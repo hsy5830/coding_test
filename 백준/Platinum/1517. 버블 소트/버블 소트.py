@@ -28,7 +28,7 @@ def merge(A, count):
             left += 1
             now += 1
         else:
-            c0 += (right + len(A_left) - now)
+            c0 += (right + len(A_left) - now) # A_right 에서 먼저 뽑히는 것들은 왼쪽으로 이동한 것!
             A[now] = A_right[right]
             right += 1
             now += 1
