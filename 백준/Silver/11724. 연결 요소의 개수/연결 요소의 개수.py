@@ -4,6 +4,8 @@
 DFS로 구현
 '''
 from collections import deque
+import sys
+input = sys.stdin.readline
 
 def DFS(graph, visited, start):
     if visited[start - 1] == 1: return
@@ -11,15 +13,6 @@ def DFS(graph, visited, start):
     # stack에 start node 삽입
     stack = [start]
     visited[start - 1] = 1
-
-    # # 인접노드 visted
-    # while len(stack) >= 1:
-    #     node = stack.pop()
-    #     while len(graph[node]) != 0:
-    #         next = graph[node].pop()
-    #         if visited[next - 1] == 0:
-    #             stack.append(next)
-    #             visited[next - 1] = 1
 
     # 인접노드 visted
     while len(stack) >= 1:
