@@ -20,24 +20,19 @@ for _ in range(N):
         idx += 2
 
 
-# distance (거리 정보)
-random_start = 1
-M, M_node = 0, random_start
+## 아래 두 과정을 BFS(v) 함수로 만들어서 좀 더 간단히 만들 수 있을 듯
+## 책에 있는 distance 리스트도 필요없다!
 
-queue = tree[random_start].copy() # already deque
+# BFS 1 - random node 기준
+random_start = 1
+M, M_node = 1, random_start
+
+queue = deque([(random_start, 0)]) # already deque
 visited = [False] * (N+1)
 visited[random_start] = True
 
-for n ,d in queue:
-    if not visited[n]:
-        visited[n] = True
-        if M <= d:
-            M = d
-            M_node = n
-
 while len(queue):
     now, dist = queue.popleft()
-    
     next = tree[now]
     for n, d in next:
         if not visited[n]:
@@ -48,23 +43,14 @@ while len(queue):
                 M_node = n
 
 
-
-queue = tree[M_node].copy() # already deque
+# BFS 2 - MAX node 기준
+queue = deque([(M_node, 0)]) # already deque
 visited = [False] * (N+1)
 visited[M_node] = True
 
-M2 = 0
-for n ,d in queue:
-    if not visited[n]:
-        visited[n] = True
-        if M2 <= d:
-            M2 = d
-            M_node = n
-        
-
+M2 = 1
 while len(queue):
     now, dist = queue.popleft()
-    
     next = tree[now]
     for n, d in next:
         if not visited[n]:
