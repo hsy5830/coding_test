@@ -22,11 +22,18 @@ for _ in range(N):
 
 # distance (거리 정보)
 random_start = 1
-M, M_node = 1, random_start
+M, M_node = 0, random_start
 
-queue = deque([(random_start, 0)]) # already deque
+queue = tree[random_start].copy() # already deque
 visited = [False] * (N+1)
 visited[random_start] = True
+
+for n ,d in queue:
+    if not visited[n]:
+        visited[n] = True
+        if M <= d:
+            M = d
+            M_node = n
 
 while len(queue):
     now, dist = queue.popleft()
@@ -42,11 +49,19 @@ while len(queue):
 
 
 
-queue = deque([(M_node, 0)]) # already deque
+queue = tree[M_node].copy() # already deque
 visited = [False] * (N+1)
 visited[M_node] = True
 
-M2 = 1
+M2 = 0
+for n ,d in queue:
+    if not visited[n]:
+        visited[n] = True
+        if M2 <= d:
+            M2 = d
+            M_node = n
+        
+
 while len(queue):
     now, dist = queue.popleft()
     
@@ -60,4 +75,3 @@ while len(queue):
                 M_node = n
 
 print(M2)
-
