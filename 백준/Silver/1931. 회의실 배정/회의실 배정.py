@@ -13,16 +13,26 @@ session.sort(key = lambda x: (x[1], x[0])) # [3, 3] [2, 3] 순서로 있을 때 
 # room.sort(key = lambda x: x[0]) 
 # room.sort(key = lambda x: x[1])
 
+# ### 리스트 append
+# # [0, 0] 에서 부터 시작,
+# ans = [[0,0]]
+# for S, E in session:
+#     if ans[-1][1] > S: continue  # 새로운 회의가 열리려면, 시작 시간의 이전 회의의 끝나는 시간과 크거나 같아야 함
+#     ans.append([S, E])
 
-# [0, 0] 에서 부터 시작,
-ans = [[0,0]]
-for S, E in session:
-    if ans[-1][1] > S: continue  # 새로운 회의가 열리려면, 시작 시간의 이전 회의의 끝나는 시간과 크거나 같아야 함
-    ans.append([S, E])
+# # [0, 0]을 제외한 회의 수 print
+# print(len(ans) - 1)
 
-# [0, 0]을 제외한 회의 수 print
-print(len(ans) - 1)
+### 더 빠르게
+count = 0
+end = -1
+for i in range(N):
+    S, E = session[i]
+    if S >= end: # 새로운 회의가 열리려면, 시작 시간의 이전 회의의 끝나는 시간과 크거나 같아야 함
+        end = E
+        count += 1
 
+print(count)
 
 
 # ##### 틀린 풀이 #####
