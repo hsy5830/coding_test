@@ -1,16 +1,18 @@
-'''
-끝나는 시간을 오름차순으로 정렬
-끝나는 시간에 맞춰서 greedy하게 추가하면 됨
-'''
+from collections import deque
 
 N = int(input())
-session = [list(map(int, input().split())) for _ in range(N)]
-session.sort(key = lambda x: (x[1], x[0]))
+meetings = [tuple(map(int, input().split())) for _ in range(N)]
 
+meetings.sort(key = lambda x: (x[1], x[0]))
+meetings = deque(meetings)
 
-ans = [[0,0]]
-for S, E in session:
-    if ans[-1][1] > S: continue
-    ans.append([S, E])
+ans = deque([meetings.popleft()])
+while len(meetings):
+    s, e = meetings.popleft()
+    if ans[-1][1] > e:
+        ans.pop()
+        ans.append((s,e))
+    elif ans[-1][1] <= s:
+        ans.append((s,e))
 
-print(len(ans) - 1)
+print(len(ans))
