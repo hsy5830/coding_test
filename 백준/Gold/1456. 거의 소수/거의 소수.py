@@ -7,21 +7,18 @@ A ~ B**0.5 까지의 소수 구해놓고,
 A, B = map(int, input().split())
 
 # [1] Sieve of Eratosthenes
-lim = max(A, int(B**0.5))
-lim = int(B**0.5)
-# primes = [True] * (lim + 1) # 1, 2, ..., 루트B
-primes = [True] * 10000001 # 1, 2, ..., 루트B
+primes = [True] * (int(B**0.5) + 1) # 1, 2, ..., 루트B
 primes[1] = False
 
-for i in range(2, lim + 1): # 여기도 제곱근 까지만 수행
+for i in range(2, int(B**0.5) + 1): # 여기도 제곱근 까지만 수행
     if primes[i] == False:
         continue
-    for j in range(2*i, lim + 1, i):
+    for j in range(2*i, int(B**0.5) + 1, i):
         primes[j] = False
 
 
 count = 0
-for prime in range(2, lim + 1):
+for prime in range(2, int(B**0.5) + 1):
     # # 이렇게하면 prime ** order가 너무 커져서 에러 발생
     # order = 2
     # if primes[prime]:
