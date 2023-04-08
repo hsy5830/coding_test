@@ -1,9 +1,17 @@
-def is_prime(N):
-    if N == 1: return False
-    for i in range(2, int(N**0.5) + 1):
-        if N % i == 0: return False
-    return True
+'''
+소수 구하기 : https://www.acmicpc.net/problem/1929
+'''
 
-a, b = map(int, input().split())
-for num in range(a, b+1):
-    if is_prime(num): print(num)
+M, N = map(int, input().split())
+
+# Sieve of Eratosthenes
+primes = [True] * (N+1)
+primes[1] = False
+
+for i in range(2, N):
+    for j in range(2*i, N+1, i):
+        primes[j] = False
+
+for prime in range(M, N+1):
+    if primes[prime]:
+        print(prime)
